@@ -11,4 +11,4 @@ for d in $(go list ./... | grep -v vendor); do
   fi
 done
 
-test "$LOCAL" == "true" || curl -s https://codecov.io/bash | sh || exit 1
+test "$LOCAL" == "true" || bash <(curl -s https://codecov.io/bash) || exit 1

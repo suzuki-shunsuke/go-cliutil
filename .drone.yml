@@ -45,16 +45,20 @@ steps:
     commands:
       - gometalinter ./...
   - name: go test
-    image: golang:1.11.2-alpine3.8
+    image: golang:1.11.2
     commands:
+      # gcc seems to be required
+      # runtime/cgo
+      # exec: "gcc": executable file not found in $PATH
       - go test -race -covermode=atomic ./...
     when:
       event:
         - pull_request
   - name: codecov
-    image: golang:1.11.2-alpine3.8
+    image: golang:1.11.2
     commands:
-      - sh scripts/codecov-test.sh
+      # bash and cgo seem to be required
+      - bash scripts/codecov-test.sh
     environment:
       CODECOV_TOKEN:
         from_secret: codecov_token
