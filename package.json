@@ -6,7 +6,7 @@
     "lint": "gometalinter ./...",
     "c": "bash scripts/coverage.sh",
     "durl": "bash scripts/durl.sh",
-    "ci-local": "time drone exec --pipeline build --env-file scripts/drone-local-env --event push"
+    "ci-local": "time drone exec --pipeline build --env-file scripts/drone-local-env --event pull_request"
   },
   "husky": {
     "hooks": {
