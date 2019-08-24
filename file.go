@@ -1,7 +1,7 @@
 package cliutil
 
 import (
-	"fmt"
+	"errors"
 	"path/filepath"
 )
 
@@ -11,14 +11,16 @@ type (
 )
 
 // FindFile finds file from wd to the root directory recursively.
-func FindFile(wd, name string, existFile ExistFile) (string, error) {
+func FindFile(wd string, existFile ExistFile, names ...string) (string, error) {
 	for {
-		p := filepath.Join(wd, name)
-		if existFile(p) {
-			return p, nil
+		for _, name := range names {
+			p := filepath.Join(wd, name)
+			if existFile(p) {
+				return p, nil
+			}
 		}
 		if wd == "/" || wd == "" {
-			return "", fmt.Errorf("%s is not found", name)
+			return "", errors.New("file is not found")
 		}
 		wd = filepath.Dir(wd)
 	}
