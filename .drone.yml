@@ -24,7 +24,7 @@ steps:
     GOPATH: /go
 
 - name: golangci-lint
-  image: golangci/golangci-lint:v1.27.0
+  image: golangci/golangci-lint:v1.28.2
   commands:
   - golangci-lint run
   environment:
